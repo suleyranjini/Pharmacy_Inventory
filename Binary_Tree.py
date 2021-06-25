@@ -40,17 +40,17 @@ class DrugNode:
             self.availCount = availCount
             self.chkoutCtr=1
     
-    def checkDrug(self, Uid, availCount):
+    def checkDrug(self, Uid):
         print(f"CHECK Uid: {Uid},self.Uid: {self.Uid}, self.availCount: {self.availCount}, self.chkoutCtr: {self.chkoutCtr}")
         if Uid == self.Uid:
             print("*******self.Uid",self.Uid)
             return True
         elif Uid < self.Uid and self.left:
             print("In Left")# recursive case
-            return self.left.checkDrug(Uid, availCount)
+            return self.left.checkDrug(Uid)
         elif Uid > self.Uid and self.right:
             print("In Right")# recursive case
-            return self.right.checkDrug(Uid, availCount)
+            return self.right.checkDrug(Uid)
         else:
             return False
         
@@ -108,3 +108,24 @@ class DrugNode:
         stkoutput=[]
         stkoutput=self.findStockOut(stkoutput)
         return stkoutput
+
+    def checkDrugStatus(self,Uid):
+        if Uid == self.Uid:
+            if self.availCount > 0:
+                if self.chkoutCtr%2==0:
+                    output=f"Drug id {self.Uid} entered {self.chkoutCtr} times into the system. Its last status was 'sell' and currently have {self.availCount} units available\n"
+                    return output
+                else:
+                    output=f"Drug id {self.Uid} entered {self.chkoutCtr} times into the system. Its last status was 'buy' and currently have {self.availCount} units available\n"
+                    return output
+            else:
+                #print(self.Uid,self.availCount)
+                output=f"All units of Drug id {self.Uid} has been sold\n"
+                return output
+        elif Uid < self.Uid and self.left:             # recursive case
+            return self.left.checkDrugStatus(Uid)
+        elif Uid > self.Uid and self.right:            # recursive case
+            return self.right.checkDrugStatus(Uid)
+        else:
+            return False
+ 

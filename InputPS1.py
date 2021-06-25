@@ -11,7 +11,7 @@ def build_tree(inp_list):
         #print(True if root else False)
         try:
             if root:
-                present=root.checkDrug(key,value)
+                present=root.checkDrug(key)
                 #print("Present",present)
                 if present:
                     status=root.searchDrug(key,value)
@@ -50,7 +50,7 @@ if __name__=="__main__":
         #print(True if root else False)
         try:
             if root:
-                present=root.checkDrug(key,value)
+                present=root.checkDrug(key)
                 #print("Present",present)
                 if present:
                     status=root.searchDrug(key,value)
@@ -85,7 +85,7 @@ if __name__=="__main__":
             #print(True if root else False)
             try:
                 if root:
-                    present=root.checkDrug(key,value)
+                    present=root.checkDrug(key)
                     print("********Present",present)
                     if present:
                         status=root.searchDrug(key,value)
@@ -123,3 +123,19 @@ if __name__=="__main__":
                 for data in output:
                     fout.write(data+"\n")
             fout.close()
+
+        if inp.startswith('checkDrugStatus'):
+            inp=(re.sub(r'(checkDrugStatus: )','',inp)).strip('\n')
+            inp=int(inp)
+            if root:
+                present=root.checkDrug(inp)
+                if present:
+                    output=root.checkDrugStatus(inp)
+                    print(inp,output)
+                else:
+                    output=f"Drug id {inp} does not exist.\n"
+                    print(inp,output)
+
+                fout = open("outputCheckDrugStatus.txt","a")
+                fout.write(output)
+                fout.close()

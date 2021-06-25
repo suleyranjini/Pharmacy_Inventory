@@ -5,6 +5,5 @@ updateDrugList: 110, 50
 printDrugInventory
 printStockOut
 checkDrugStatus: 114
-checkDrugStatus: 111
-freqDemand: sell, 1
-supplyShortage: 11
+checkDrugStatus: 112
+checkDrugStatus: 115
